@@ -18,6 +18,16 @@ int main(int argc, string argv[])
     }
 
     char* keyword = (argv[1]);
+    // check keyword
+    for (int i = 0, n = strlen(keyword); i < n; i++)
+    {
+        if (!isalpha(keyword[i]))
+        {
+            printf("key work have to be all alpha chars\n");
+            return 1;
+        }
+    }
+
     char* text = GetString();
     caesar(text, keyword);
     return 0;
@@ -26,33 +36,38 @@ int main(int argc, string argv[])
 void caesar(char* text, char* keyword)
 {
     char current;
+    int space = 0;
     int len_keyword = strlen(keyword);
     char k;
 
     for (int i = 0, n = strlen(text); i < n; i++)
     {
-        current =  text[i];
+        current = text[i];
 
-        // find the char k 
-        k = keyword[i % len_keyword];
+        // find the char k
+        k = keyword[(i - space) % len_keyword];
 
         // get ki
         // k in the range of a..z
-        if (k >= 'a') {
-            k = k  - 'a';
-        } else {
-        // k in the range of A..Z
+        if (k >= 'a')
+        {
+            k = k - 'a';
+        }
+        else
+        {
+            // k in the range of A..Z
             k = k - 'A';
         }
 
         if (!isalpha(current))
         {
+            space++;
             printf("%c", current);
         }
         else if (current >= 'a' )
         {
-            //ci = (pi + ki) % 26
-            // something wrong here?            
+            // ci = (pi + ki) % 26
+            // something wrong here?
             printf("%c", 'a' + (current - 'a' + k ) % 26);
         }
         else
