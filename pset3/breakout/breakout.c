@@ -89,6 +89,16 @@ int main(void)
  */
 void initBricks(GWindow window)
 {
+    // one break fist
+    char* colors[] = {"RED", "ORANGE", "YELLOW", "GREEN", "CYAN"};
+    for (int i = 0; i < COLS; i ++) {
+        for (int j = 0; j < ROWS; j ++) {
+    GRect rect = newGRect( 3 + i * 40, 50 + j * 12, 35, 8);
+    setFilled(rect, true);
+    setColor(rect, colors[j]);
+    add(window, rect);
+    }
+    }
     // TODO
 }
 
@@ -97,8 +107,12 @@ void initBricks(GWindow window)
  */
 GOval initBall(GWindow window)
 {
-    // TODO
-    return NULL;
+    int radius= 20;
+    GOval oval = newGOval(WIDTH/2, HEIGHT/2, radius, radius);
+    setFilled(oval, true);
+    setColor(oval, "BLACK");
+    add(window, oval);
+    return oval;
 }
 
 /**
@@ -107,7 +121,13 @@ GOval initBall(GWindow window)
 GRect initPaddle(GWindow window)
 {
     // TODO
-    return NULL;
+    //
+    GRect rect = newGRect( 160 , 500 , 80, 10);
+    setFilled(rect, true);
+    setColor(rect, "BLACK");
+    add(window, rect);
+    
+    return rect;
 }
 
 /**
@@ -116,7 +136,12 @@ GRect initPaddle(GWindow window)
 GLabel initScoreboard(GWindow window)
 {
     // TODO
-    return NULL;
+    GLabel label = newGLabel("");
+    setFont(label, "SansSerif-75");
+    setLabel(label, "0");
+    add(window, label);
+    setLocation(label, 190, 250);
+    return label;
 }
 
 /**
